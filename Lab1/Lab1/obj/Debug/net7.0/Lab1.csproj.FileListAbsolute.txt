@@ -1,0 +1,14 @@
+D:\OneDrive\Desktop\Opţional_Lab\.NET\Lab1\Lab1\obj\Debug\net7.0\Lab1.GeneratedMSBuildEditorConfig.editorconfig
+D:\OneDrive\Desktop\Opţional_Lab\.NET\Lab1\Lab1\obj\Debug\net7.0\Lab1.AssemblyInfoInputs.cache
+D:\OneDrive\Desktop\Opţional_Lab\.NET\Lab1\Lab1\obj\Debug\net7.0\Lab1.AssemblyInfo.cs
+D:\OneDrive\Desktop\Opţional_Lab\.NET\Lab1\Lab1\obj\Debug\net7.0\Lab1.csproj.CoreCompileInputs.cache
+D:\OneDrive\Desktop\Opţional_Lab\.NET\Lab1\Lab1\bin\Debug\net7.0\Lab1.exe
+D:\OneDrive\Desktop\Opţional_Lab\.NET\Lab1\Lab1\bin\Debug\net7.0\Lab1.deps.json
+D:\OneDrive\Desktop\Opţional_Lab\.NET\Lab1\Lab1\bin\Debug\net7.0\Lab1.runtimeconfig.json
+D:\OneDrive\Desktop\Opţional_Lab\.NET\Lab1\Lab1\bin\Debug\net7.0\Lab1.dll
+D:\OneDrive\Desktop\Opţional_Lab\.NET\Lab1\Lab1\bin\Debug\net7.0\Lab1.pdb
+D:\OneDrive\Desktop\Opţional_Lab\.NET\Lab1\Lab1\obj\Debug\net7.0\Lab1.dll
+D:\OneDrive\Desktop\Opţional_Lab\.NET\Lab1\Lab1\obj\Debug\net7.0\refint\Lab1.dll
+D:\OneDrive\Desktop\Opţional_Lab\.NET\Lab1\Lab1\obj\Debug\net7.0\Lab1.pdb
+D:\OneDrive\Desktop\Opţional_Lab\.NET\Lab1\Lab1\obj\Debug\net7.0\Lab1.genruntimeconfig.cache
+D:\OneDrive\Desktop\Opţional_Lab\.NET\Lab1\Lab1\obj\Debug\net7.0\ref\Lab1.dll
