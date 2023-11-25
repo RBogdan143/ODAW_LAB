@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\decrement",
+    "\\src\\app\\demo"
+  ],
+  "SelectedNode": "\\src\\app\\decrement\\decrement.component.ts",
+  "PreviewInSolutionExplorer": false
+}
