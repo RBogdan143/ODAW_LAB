@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\OneDrive\\Desktop\\Opţional_Lab\\.NET\\Lab1\\Lab1\\Lab1.csproj": {}
+    "D:\\OneDrive\\Desktop\\Opţional_Lab\\.NET\\ODAW_LAB\\Lab1\\Lab1\\Lab1.csproj": {}
   },
   "projects": {
-    "D:\\OneDrive\\Desktop\\Opţional_Lab\\.NET\\Lab1\\Lab1\\Lab1.csproj": {
+    "D:\\OneDrive\\Desktop\\Opţional_Lab\\.NET\\ODAW_LAB\\Lab1\\Lab1\\Lab1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\OneDrive\\Desktop\\Opţional_Lab\\.NET\\Lab1\\Lab1\\Lab1.csproj",
+        "projectUniqueName": "D:\\OneDrive\\Desktop\\Opţional_Lab\\.NET\\ODAW_LAB\\Lab1\\Lab1\\Lab1.csproj",
         "projectName": "Lab1",
-        "projectPath": "D:\\OneDrive\\Desktop\\Opţional_Lab\\.NET\\Lab1\\Lab1\\Lab1.csproj",
+        "projectPath": "D:\\OneDrive\\Desktop\\Opţional_Lab\\.NET\\ODAW_LAB\\Lab1\\Lab1\\Lab1.csproj",
         "packagesPath": "C:\\Users\\bogda\\.nuget\\packages\\",
-        "outputPath": "D:\\OneDrive\\Desktop\\Opţional_Lab\\.NET\\Lab1\\Lab1\\obj\\",
+        "outputPath": "D:\\OneDrive\\Desktop\\Opţional_Lab\\.NET\\ODAW_LAB\\Lab1\\Lab1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\bogda\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -55,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

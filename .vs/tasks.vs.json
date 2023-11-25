@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-Lab7",
+      "appliesTo": "Lab7/",
+      "type": "launch"
+    }
+  ]
+}
