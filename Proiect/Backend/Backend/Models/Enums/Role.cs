@@ -1,8 +1,12 @@
-﻿namespace Backend.Models.Enums
+﻿using System.Runtime.Serialization;
+
+namespace Backend.Models.Enums
 {
     public enum Role
     {
-        Admin, 
+        [EnumMember(Value = "Admin")]
+        Admin,
+        [EnumMember(Value = "User")]
         User
     }
 }

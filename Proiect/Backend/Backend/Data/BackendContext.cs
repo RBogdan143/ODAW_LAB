@@ -19,6 +19,10 @@ namespace Backend.Data
         public DbSet<StocProdus> StocProduse { get; set; }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<RegisterModel> Register { get; set; }
+
+        public DbSet<LoginModel> Login { get; set; }
         public BackendContext(DbContextOptions<BackendContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

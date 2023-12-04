@@ -8,5 +8,9 @@ namespace Backend.Repositories.UserRepository
         User FindByUsername(string username);
 
         List<User> FindAllActive();
+        Task UpdateAsync(User user);
+
+        Task AddAsync(User user);
+        Task<User> AuthenticateAsync(string username, string password);
     }
 }

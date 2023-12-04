@@ -2,6 +2,7 @@
 using Backend.Helpers.Extensions;
 using Backend.Models;
 using Backend.Repositories.GenericRepository;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repositories.UserRepository
 {
@@ -19,6 +20,23 @@ namespace Backend.Repositories.UserRepository
         public User FindByUsername(string username)
         {
             return _table.FirstOrDefault(u => u.Username.Equals(username));
+        }
+
+        public async Task UpdateAsync(User user)
+        {
+            _backendContext.Update(user);
+            await _backendContext.SaveChangesAsync();
+        }
+
+        public async Task AddAsync(User user)
+        {
+            await _backendContext.AddAsync(user);
+            await _backendContext.SaveChangesAsync();
+        }
+        public async Task<User> AuthenticateAsync(string username, string password)
+        {
+            var user = await _table.FirstOrDefaultAsync(u => u.Username.Equals(username) && u.Password.Equals(password));
+            return user;
         }
     }
 }

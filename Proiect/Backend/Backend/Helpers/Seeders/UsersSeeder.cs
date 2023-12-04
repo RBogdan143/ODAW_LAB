@@ -35,8 +35,7 @@ namespace Backend.Helpers.Seeders
                     IsDeleted = false,
                     Email = "user2@mail.com",
                     Username = "user2",
-                    Password = "0000",
-                    Role = Role.User
+                    Password = "0000"
                 };
 
                 _backendContext.Users.Add(user1);
