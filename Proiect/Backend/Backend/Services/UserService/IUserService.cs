@@ -15,5 +15,7 @@ namespace Backend.Services.UserService
 
         Task<bool> CreateUserAsync(User users);
         Task<User> AuthenticateAsync(string username, string password);
+        Task<bool> DeleteUser(string username);
+        Task<bool> UpdateUserProfile(string userId, UpdateProfileModel model);
     }
 }

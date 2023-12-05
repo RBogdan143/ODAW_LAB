@@ -38,5 +38,17 @@ namespace Backend.Repositories.UserRepository
             var user = await _table.FirstOrDefaultAsync(u => u.Username.Equals(username) && u.Password.Equals(password));
             return user;
         }
+
+        public async Task DeleteAsync(User user)
+        {
+            _backendContext.Remove(user);
+            await _backendContext.SaveChangesAsync();
+        }
+
+        public async Task<User> GetByIdAsync(string id)
+        {
+            Guid userIdGuid = Guid.Parse(id);
+            return await _backendContext.Users.FirstOrDefaultAsync(u => u.Id == userIdGuid);
+        }
     }
 }

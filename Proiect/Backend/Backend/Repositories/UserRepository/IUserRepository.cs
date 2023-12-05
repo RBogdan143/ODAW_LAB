@@ -12,5 +12,7 @@ namespace Backend.Repositories.UserRepository
 
         Task AddAsync(User user);
         Task<User> AuthenticateAsync(string username, string password);
+        Task DeleteAsync(User user);
+        Task<User> GetByIdAsync(string id);
     }
 }

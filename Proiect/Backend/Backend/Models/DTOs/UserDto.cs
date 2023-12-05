@@ -1,4 +1,6 @@
-﻿namespace Backend.Models.DTOs
+﻿using Backend.Models.Enums;
+
+namespace Backend.Models.DTOs
 {
     public class UserDto
     {
@@ -7,5 +9,6 @@
 
         public string Email { get; set; }
         public string Username { get; set; }
+        public Role Role { get; set; }
     }
 }

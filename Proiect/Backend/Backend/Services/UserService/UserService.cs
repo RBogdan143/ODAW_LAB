@@ -43,7 +43,8 @@ namespace Backend.Services.UserService
             var user = _userRepository.FindByUsername(username);
             if (user != null)
             {
-                user.Role = role; // Presupunând că aveți o proprietate Role în modelul User
+                user.Role = role;
+                user.DateModified = DateTime.Now;
                 await _userRepository.UpdateAsync(user);
             }
             else
@@ -58,6 +59,7 @@ namespace Backend.Services.UserService
             if (user != null)
             {
                 user.Role = Role.User; // Setează rolul implicit după eliminarea rolului de admin
+                user.DateModified = DateTime.Now;
                 await _userRepository.UpdateAsync(user);
             }
             else
@@ -84,6 +86,35 @@ namespace Backend.Services.UserService
         {
             var user = await _userRepository.AuthenticateAsync(username, password);
             return _mapper.Map<User>(user);
+        }
+
+        public async Task<bool> DeleteUser(string username)
+        {
+            var user = _userRepository.FindByUsername(username);
+            if (user != null)
+            {
+                await _userRepository.DeleteAsync(user);
+                return true; // Returnează true dacă ștergerea a fost un succes
+            }
+            return false; // Returnează false dacă utilizatorul nu a fost găsit
+        }
+
+        public async Task<bool> UpdateUserProfile(string userId, UpdateProfileModel model)
+        {
+            var user = await _userRepository.GetByIdAsync(userId);
+            if (user != null)
+            {
+                // Actualizează doar câmpurile care nu sunt nule în DTO
+                user.Email = model.Email ?? user.Email;
+                user.Password = model.Password ?? user.Password;
+                user.Username = model.Username ?? user.Username;
+                user.LastName = model.LastName ?? user.LastName;
+                user.FirstName = model.FirstName ?? user.FirstName;
+
+                await _userRepository.UpdateAsync(user);
+                return true; // Returnează true dacă actualizarea a fost un succes
+            }
+            return false; // Returnează false dacă utilizatorul nu a fost găsit
         }
     }
 }
