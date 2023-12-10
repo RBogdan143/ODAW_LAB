@@ -1,0 +1,67 @@
+<!-- Temă lab 8 -->
+<p>Requests</p>
+<p>Profesorii angajaţi sunt:</p>
+<div *ngFor="let teacher of teacher">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Nume: {{ teacher.name }}</mat-card-title>
+      <mat-card-subtitle>Id: {{ teacher.id }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Salariu: {{ teacher.salary }} lei/luna</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<p>Manualele folosite sunt:</p>
+<div *ngFor="let manual of manual">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Nume: {{ manual.name }}</mat-card-title>
+      <mat-card-subtitle>Id: {{ manual.id }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Scurta descriere: {{ manual.description }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<p>Manualele folosite de fiecare profesor:</p>
+<div *ngFor="let entry of teacherManualMap | keyvalue">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ entry.key }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Foloseste urmatoarele manuale:</p>
+      <ul>
+        <li *ngFor="let manualName of entry.value">
+          {{ manualName }}
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</div>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title><p>Adauga un profesor in baza de date:</p></mat-card-title>
+</mat-card-header>
+  <mat-card-content>
+    <form (ngSubmit)="addTeacher()">
+      <input type="text" [(ngModel)]="newTeacher.name" name="name" placeholder="Numele profesorului" required>
+      <input type="text" [(ngModel)]="newTeacher.salary" name="salary" placeholder="Salariul profesorului" required>
+      <button type="submit">Adaugă Profesor</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title><p>Actualizeaza un profesor din baza de date:</p></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form (ngSubmit)="updateTeacherData()">
+      <input type="text" [(ngModel)]="updateTeacher.id" name="id" placeholder="Id-ul profesorului" required>
+      <input type="text" [(ngModel)]="updateTeacher.name" name="name" placeholder="Numele profesorului" required>
+      <input type="text" [(ngModel)]="updateTeacher.salary" name="salary" placeholder="Salariul profesorului" required>
+      <button type="submit">Adaugă Profesor</button>
+    </form>
+  </mat-card-content>
+</mat-card>
