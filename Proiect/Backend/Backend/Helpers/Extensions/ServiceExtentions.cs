@@ -15,7 +15,7 @@ namespace Backend.Helpers.Extensions
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserService, DatabaseService>();
 
             return services;
         }

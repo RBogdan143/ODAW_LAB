@@ -6,12 +6,12 @@ using Backend.Repositories.UserRepository;
 
 namespace Backend.Services.UserService
 {
-    public class UserService: IUserService
+    public class DatabaseService: IUserService
     {
         public IUserRepository _userRepository;
         public IMapper _mapper;
 
-        public UserService(IUserRepository userRepository, IMapper mapper)
+        public DatabaseService(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mapper = mapper;

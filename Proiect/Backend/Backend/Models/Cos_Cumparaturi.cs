@@ -22,5 +22,7 @@ namespace Backend.Models
                 return subtotal;
             }
         }
+        public User user { get; set; }
+        public Guid UserId { get; set; }
     }
 }

@@ -14,5 +14,7 @@ namespace Backend.Models
         public string Password { get; set; }
 
         public Role Role { get; set; } = Role.User;
+
+        public Cos_Cumparaturi Cos {  get; set; }
     }
 }

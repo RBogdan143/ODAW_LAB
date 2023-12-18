@@ -38,6 +38,11 @@ namespace Backend.Data
                 .WithOne(m6 => m6.Cos_Redus)
                 .HasForeignKey<Discounts>(m6 => m6.Cos_CumparaturiId);
 
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Cos)
+                .WithOne(c => c.user)
+                .HasForeignKey<Cos_Cumparaturi>(u => u.UserId);
+
             // Many to Many
             modelBuilder.Entity<StocProdus>().HasKey(mr => new { mr.ProdusId, mr.StocId });
 
