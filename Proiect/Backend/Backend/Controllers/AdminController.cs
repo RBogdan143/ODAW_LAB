@@ -32,8 +32,6 @@ namespace Backend.Controllers
                     IdProdus = x.produs.Id,
                     NumeProdus = x.produs.Nume,
                     PretProdus = x.produs.Pret,
-                    DescriereProdus = x.produs.Descriere,
-                    ImagineProdus = x.produs.Imagine,
                     IdStoc = x.stocProdus.Stoc.Id,
                     Stoc = x.stocProdus.Stoc.Nr_Produse
                 }).ToListAsync();
@@ -51,7 +49,8 @@ namespace Backend.Controllers
                     Promo = x.Promo_Code,
                     Discount = x.Discount_Percent
 
-                }).GroupBy(y => y.Discount).ToListAsync();
+                }).GroupBy(y => y.Discount)
+                .ToListAsync();
 
             return Ok(discounts);
 

@@ -2,14 +2,10 @@
 using Backend.Models.DTOs;
 using Backend.Models.Enums;
 using Backend.Services.UserService;
+using Backend.Services.Token_JWT;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 
 namespace Backend.Controllers
 {
@@ -17,13 +13,13 @@ namespace Backend.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        private IUserService _userService;
+        private readonly IUserService _userService;
+        private readonly JwtTokenService _JwtToken;
 
-        public UsersController(IConfiguration configuration, IUserService userService)
+        public UsersController(IUserService userService, JwtTokenService JwtToken)
         {
-            _configuration = configuration;
             _userService = userService;
+            _JwtToken = JwtToken;
         }
 
         [HttpGet("Find_User")]
@@ -63,6 +59,7 @@ namespace Backend.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
@@ -84,6 +81,7 @@ namespace Backend.Controllers
             return BadRequest(new { message = "User registration failed." });
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
@@ -91,7 +89,7 @@ namespace Backend.Controllers
             if (user != null)
             {
                 // Generarea token-ului JWT
-                var token = GenerateJwtToken(user);
+                var token = _JwtToken.GenerateToken(user);
 
                 return Ok(new { token = token });
             }
@@ -115,7 +113,7 @@ namespace Backend.Controllers
         [Authorize]
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileModel model)
         {
-            // Obțineți ID-ul utilizatorului autentificat din claim-urile token-ului JWT
+            // Obținem ID-ul utilizatorului autentificat din claim-urile token-ului JWT
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var result = await _userService.UpdateUserProfile(userId, model);
@@ -124,30 +122,6 @@ namespace Backend.Controllers
                 return Ok("Profilul a fost actualizat cu succes.");
             }
             return BadRequest("Actualizarea profilului a eșuat.");
-        }
-
-        private string GenerateJwtToken(User user)
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var claims = new[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Username),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-                // Adaugă alte claims după necesitate
-            };
-
-            var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddHours(1),
-                signingCredentials: credentials
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

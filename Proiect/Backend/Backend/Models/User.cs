@@ -13,8 +13,10 @@ namespace Backend.Models
         public string Username { get; set; }
         public string Password { get; set; }
 
+        public double Balanta_Cont { get; set; } = 100.50;
+
         public Role Role { get; set; } = Role.User;
 
-        public Cos_Cumparaturi Cos {  get; set; }
+        public Cos_Cumparaturi? Cos {  get; set; }
     }
 }

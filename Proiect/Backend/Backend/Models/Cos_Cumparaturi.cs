@@ -5,7 +5,7 @@ namespace Backend.Models
     public class Cos_Cumparaturi: BaseEntity
     {
         public ICollection<Produse> Produse_Alese { get; set; }
-        public Discounts Discount { get; set; }
+        public Discounts? Discount { get; set; }
         public double Total_Plata
         {
             get

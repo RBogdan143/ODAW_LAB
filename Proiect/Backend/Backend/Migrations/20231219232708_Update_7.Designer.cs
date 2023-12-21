@@ -4,6 +4,7 @@ using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(BackendContext))]
-    partial class BackendContextModelSnapshot : ModelSnapshot
+    [Migration("20231219232708_Update_7")]
+    partial class Update_7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,7 +48,7 @@ namespace Backend.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Cos", (string)null);
+                    b.ToTable("Cos");
                 });
 
             modelBuilder.Entity("Backend.Models.Discounts", b =>
@@ -79,7 +82,7 @@ namespace Backend.Migrations
                         .IsUnique()
                         .HasFilter("[Cos_CumparaturiId] IS NOT NULL");
 
-                    b.ToTable("Discount", (string)null);
+                    b.ToTable("Discount");
                 });
 
             modelBuilder.Entity("Backend.Models.LoginModel", b =>
@@ -107,7 +110,7 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Login", (string)null);
+                    b.ToTable("Login");
                 });
 
             modelBuilder.Entity("Backend.Models.Produse", b =>
@@ -146,7 +149,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("Cos_CumparaturiId");
 
-                    b.ToTable("Produs", (string)null);
+                    b.ToTable("Produs");
                 });
 
             modelBuilder.Entity("Backend.Models.RegisterModel", b =>
@@ -178,7 +181,7 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Register", (string)null);
+                    b.ToTable("Register");
                 });
 
             modelBuilder.Entity("Backend.Models.Stoc", b =>
@@ -201,7 +204,7 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Stocul", (string)null);
+                    b.ToTable("Stocul");
                 });
 
             modelBuilder.Entity("Backend.Models.StocProdus", b =>
@@ -216,7 +219,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("StocId");
 
-                    b.ToTable("StocProduse", (string)null);
+                    b.ToTable("StocProduse");
                 });
 
             modelBuilder.Entity("Backend.Models.User", b =>
@@ -260,7 +263,7 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Backend.Models.Cos_Cumparaturi", b =>
