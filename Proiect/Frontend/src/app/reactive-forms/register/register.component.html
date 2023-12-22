@@ -1,0 +1,14 @@
+<div>
+  <p>Reactive forms</p>
+  <form [formGroup]="registerForm2">
+    <input formControlName="username" placeholder="Username" type="text">
+    <input formControlName="email" placeholder="Email" type="text">
+    <input formControlName="password" placeholder="Password" type="password">
+  </form>
+  <div>
+    <button (click)="register()"> Submit</button>
+  </div>
+  <div>
+    <p>{{ message }}</p>
+  </div>
+</div>

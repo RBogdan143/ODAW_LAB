@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.angular\\cache",
+    "\\.angular\\cache\\17.0.8",
+    "\\.angular\\cache\\17.0.8\\vite",
+    "\\.angular\\cache\\17.0.8\\vite\\deps",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\core",
+    "\\src\\app\\core\\services",
+    "\\src\\app\\reactive-forms",
+    "\\src\\app\\reactive-forms\\register"
+  ],
+  "SelectedNode": "\\src\\app\\app.module.ts",
+  "PreviewInSolutionExplorer": false
+}
