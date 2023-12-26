@@ -6,6 +6,7 @@ using Backend.Services.Token_JWT;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Backend.Controllers
 {
@@ -114,14 +115,23 @@ namespace Backend.Controllers
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileModel model)
         {
             // Obținem ID-ul utilizatorului autentificat din claim-urile token-ului JWT
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(JwtRegisteredClaimNames.Jti);
 
             var result = await _userService.UpdateUserProfile(userId, model);
             if (result)
             {
-                return Ok("Profilul a fost actualizat cu succes.");
+                return Ok(new { message = " Profilul a fost actualizat cu succes." });
             }
             return BadRequest("Actualizarea profilului a eșuat.");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Find([FromQuery] Guid ID)
+        {
+            // Obținem ID-ul utilizatorului autentificat din claim-urile token-ului JWT
+            var user = await _userService.GetById(ID);
+
+            return Ok(new { user = user });
         }
     }
 }

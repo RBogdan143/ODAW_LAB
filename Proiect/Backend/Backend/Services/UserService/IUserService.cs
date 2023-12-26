@@ -10,6 +10,8 @@ namespace Backend.Services.UserService
 
         UserDto GetUserByUsername(string username);
 
+        Task<User> GetById(Guid id);
+
         Task AssignRoleToUser(string username, Role role);
         Task RemoveRoleFromUser(string username, Role role);
 

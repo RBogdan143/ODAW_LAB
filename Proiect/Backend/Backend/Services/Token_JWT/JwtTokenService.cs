@@ -22,15 +22,15 @@ namespace Backend.Services.Token_JWT
 
             var claims = new[]
             {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Username),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim("role", user.Role.ToString()),
-            new Claim(JwtRegisteredClaimNames.Jti, user.Id.ToString())
-        };
+                new Claim(JwtRegisteredClaimNames.Sub, user.Username),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim("role", user.Role.ToString()),
+                new Claim(JwtRegisteredClaimNames.Jti, user.Id.ToString())
+            };
 
             var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
+                issuer: "https://localhost:7146",
+                audience: "https://localhost:4200",
                 claims: claims,
                 expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: credentials

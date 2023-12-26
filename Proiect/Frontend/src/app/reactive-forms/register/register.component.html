@@ -1,12 +1,24 @@
 <div>
   <p>Reactive forms</p>
-  <form [formGroup]="registerForm2">
+  <form [formGroup]="registerForm">
     <input formControlName="username" placeholder="Username" type="text">
     <input formControlName="email" placeholder="Email" type="text">
     <input formControlName="password" placeholder="Password" type="password">
   </form>
   <div>
     <button (click)="register()"> Submit</button>
+  </div>
+  <p></p>
+  <form [formGroup]="loginForm">
+    <input formControlName="username" placeholder="Username" type="text">
+    <input formControlName="password" placeholder="Password" type="password">
+  </form>
+  <div>
+    <button (click)="login()"> Submit</button>
+  </div>
+  <p></p>
+  <div>
+    <button (click)="logout()"> Log out </button>
   </div>
   <div>
     <p>{{ message }}</p>

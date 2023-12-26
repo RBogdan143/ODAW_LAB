@@ -11,15 +11,12 @@ import { AuthenticationService } from '../../core/services/authentication.servic
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  registerForm = this.formBuilder.group({
+  loginForm = this.formBuilder.group({
     username: ['', Validators.required],
-    email: ['', Validators.email],
-    password: ['', Validators.required],
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
+    password: ['', Validators.required]
   })
 
-  registerForm2 = new FormGroup({
+  registerForm = new FormGroup({
     username: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required)
@@ -32,12 +29,48 @@ export class RegisterComponent {
   message: any;
 
   register() {
-    console.log(this.registerForm2.value);
-    if (this.registerForm2.valid)
-      this.authenticationService.register(this.registerForm2.value).subscribe(data => {
-        this.message = String(data.message);
-      });
+    console.log(this.registerForm.value);
+    this.message = null;
+    if (this.registerForm.valid)
+      this.authenticationService.register(this.registerForm.value).subscribe(data => {
+          this.message = String(data.message);
+        }
+      );
     else this.message = "User registration failed.";
   }
 
+  login() {
+    console.log(this.loginForm.value);
+    this.message = null;
+    if (this.loginForm.valid)
+    {
+      this.authenticationService.login(this.loginForm.value).subscribe(
+        data => {
+          localStorage.setItem('token', data.token);
+          this.message = "User logged in successfully!";
+          console.log(localStorage.getItem('token'));
+          setTimeout(() => {
+            this.logout();
+          }, 1800000);
+        },
+        response => {
+          this.message = "Eroare necunoscută";
+          if (response && typeof response === 'object' && 'error' in response) {
+            let error = response.error;
+            if (error && typeof error === 'object' && 'message' in error) {
+              this.message = String(error.message);
+            }
+          }
+        }
+      );
+    }
+    else this.message = "User authentication failed.";
+  }
+
+  logout() {
+    this.message = null;
+    if (localStorage.getItem('token'))
+      localStorage.removeItem('token');
+    this.message = "User logged out successfully!";
+  }
 }

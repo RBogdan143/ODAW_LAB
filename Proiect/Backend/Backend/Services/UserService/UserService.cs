@@ -24,6 +24,12 @@ namespace Backend.Services.UserService
             return _mapper.Map<List<UserDto>>(userList);
         }
 
+        public async Task<User> GetById(Guid id)
+        {
+            var user = await _userRepository.GetByIdAsync(id.ToString());
+            return _mapper.Map<User>(user);
+        }
+
         public UserDto GetUserByUsername(string username)
         {
             var user = _userRepository.FindByUsername(username);
@@ -110,6 +116,7 @@ namespace Backend.Services.UserService
                 user.Username = model.Username ?? user.Username;
                 user.LastName = model.LastName ?? user.LastName;
                 user.FirstName = model.FirstName ?? user.FirstName;
+                user.DateModified = DateTime.UtcNow;
 
                 await _userRepository.UpdateAsync(user);
                 return true; // Returnează true dacă actualizarea a fost un succes

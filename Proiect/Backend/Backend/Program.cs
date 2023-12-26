@@ -44,7 +44,7 @@ builder.Services.AddAuthentication(options =>
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
         ValidIssuer = "https://localhost:7146",
-        ValidAudience = "http://localhost:4200",
+        ValidAudience = "https://localhost:4200",
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
@@ -81,17 +81,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(MyAllowSpecificOrigins);
+
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
 
 app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseCors(MyAllowSpecificOrigins);
+app.UseMiddleware<JwtMiddleware>();
+
+app.MapControllers();
 
 app.Run();
 
