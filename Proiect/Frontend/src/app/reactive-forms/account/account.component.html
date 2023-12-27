@@ -1,0 +1,16 @@
+<div>
+  <p>Account forms</p>
+  <form [formGroup]="accountForm">
+    <input formControlName="FirstName" placeholder="First Name" type="text">
+    <input formControlName="LastName" placeholder="Last Name" type="text">
+    <input formControlName="username" placeholder="Username" type="text">
+    <input formControlName="email" placeholder="Email" type="text">
+    <input formControlName="password" placeholder="Password" type="password">
+  </form>
+  <div>
+    <button (click)="modify()"> Submit</button>
+  </div>
+  <div>
+    <p>{{ message }}</p>
+  </div>
+</div>
