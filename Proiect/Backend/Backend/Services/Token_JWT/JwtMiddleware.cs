@@ -1,6 +1,7 @@
 ﻿using Backend.Services.UserService;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
 namespace Backend.Services.Token_JWT
@@ -41,6 +42,14 @@ namespace Backend.Services.Token_JWT
 
                     // Attach user to context on successful jwt validation
                     context.Items["User"] = await userService.GetById(userId);
+
+                    var role = jwtToken.Claims.First(x => x.Type == ClaimTypes.Role).Value;
+
+                    // Attach role to context on successful jwt validation
+                    context.Items["Role"] = role;
+
+                    var claimsIdentity = new ClaimsIdentity(jwtToken.Claims, "jwt");
+                    context.User = new ClaimsPrincipal(claimsIdentity);
                 }
                 catch {}
             }

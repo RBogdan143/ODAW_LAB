@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Backend.Controllers
 {
@@ -46,7 +47,7 @@ namespace Backend.Controllers
         [HttpPost("Adauga_Cos")]
         public async Task<IActionResult> Create([FromBody] Cos_CumparaturiDTO cos)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(JwtRegisteredClaimNames.Jti);
 
             var produs = await _backendcontext.Produs
                 .Where(p => p.Id == cos.IdProdus)
@@ -98,7 +99,7 @@ namespace Backend.Controllers
         [HttpPut("Modifica_Cos")]
         public async Task<IActionResult> Update([FromBody] Guid? IdProdus, [FromQuery] string? PromoCode)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(JwtRegisteredClaimNames.Jti);
 
             var cos = await _backendcontext.Cos
                 .FirstOrDefaultAsync(c => c.UserId.ToString() == userId);
@@ -149,7 +150,7 @@ namespace Backend.Controllers
         [HttpDelete("Scoate_Produse")]
         public async Task<IActionResult> Delete([FromBody] Guid IdProdus)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(JwtRegisteredClaimNames.Jti);
 
             var cos = await _backendcontext.Cos
                 .FirstOrDefaultAsync(c => c.UserId.ToString() == userId);
@@ -172,7 +173,7 @@ namespace Backend.Controllers
         [HttpDelete("Tranzactie")]
         public async Task<IActionResult> Delete()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(JwtRegisteredClaimNames.Jti);
 
             var Me = await _backendcontext.Users
                 .Where(i => i.Id.ToString() == userId)

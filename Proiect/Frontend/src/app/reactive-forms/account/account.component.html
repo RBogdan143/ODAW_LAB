@@ -1,11 +1,11 @@
 <div>
   <p>Account forms</p>
   <form [formGroup]="accountForm">
-    <input formControlName="FirstName" placeholder="First Name" type="text">
-    <input formControlName="LastName" placeholder="Last Name" type="text">
-    <input formControlName="username" placeholder="Username" type="text">
-    <input formControlName="email" placeholder="Email" type="text">
-    <input formControlName="password" placeholder="Password" type="password">
+    <input formControlName="FirstName" placeholder="First Name: {{account.firstName}}" type="text">
+    <input formControlName="LastName" placeholder="Last Name: {{account.lastName}}" type="text">
+    <input formControlName="username" placeholder="Username: {{account.username}}" type="text">
+    <input formControlName="email" placeholder="{{account.email}}" type="text">
+    <input formControlName="password" placeholder="{{account.password}}" type="password">
   </form>
   <div>
     <button (click)="modify()"> Submit</button>

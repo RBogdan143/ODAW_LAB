@@ -34,6 +34,15 @@ export class RegisterComponent {
     if (this.registerForm.valid)
       this.authenticationService.register(this.registerForm.value).subscribe(data => {
           this.message = String(data.message);
+      },
+        response => {
+          this.message = "Eroare necunoscută";
+          if (response && typeof response === 'object' && 'error' in response) {
+            let error = response.error;
+            if (error && typeof error === 'object' && 'message' in error) {
+              this.message = String(error.message);
+            }
+          }
         }
       );
     else this.message = "User registration failed.";

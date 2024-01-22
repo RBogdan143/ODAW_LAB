@@ -12,19 +12,19 @@ export class ApiService {
     this.apiUrl = 'https://localhost:7146/api/';
   }
 
-  get<T>(path: string, params = {}): Observable<any>{
-    return this.httpClient.get<T>(`${this.apiUrl}${path}`, {params});
+  get<T>(path: string, params?: any): Observable<any>{
+    return this.httpClient.get<T>(`${this.apiUrl}${path}`, params);
   }
 
   put<T>(path: string, body = {}, options?: any): Observable<any>{
     return this.httpClient.put<T>(`${this.apiUrl}${path}`, body, options);
   }
 
-  post<T>(path: string, body = {}): Observable<any>{
-    return this.httpClient.post<T>(`${this.apiUrl}${path}`, body);
+  post<T>(path: string, body = {}, options?: any): Observable<any>{
+    return this.httpClient.post<T>(`${this.apiUrl}${path}`, body, options);
   }
 
-  delete<T>(path: string): Observable<any>{
-    return this.httpClient.delete<T>(`${this.apiUrl}${path}`);
+  delete<T>(path: string, options?: any): Observable<any>{
+    return this.httpClient.delete<T>(`${this.apiUrl}${path}`, options);
   }
 }

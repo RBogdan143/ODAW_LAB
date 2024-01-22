@@ -19,4 +19,16 @@ export class AccountService {
       return this.apiService.put(this.route + '/UpdateProfile', user);
     }
   }
+
+  Profile() {
+    if (localStorage.getItem('token')) {
+      const headers = {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      };
+      return this.apiService.get(this.route + '/Account',  { headers: headers });
+    }
+    else {
+      return this.apiService.get(this.route + '/Account');
+    }
+  }
 }

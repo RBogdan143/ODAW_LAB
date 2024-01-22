@@ -33,7 +33,9 @@ namespace Backend.Services.UserService
         public UserDto GetUserByUsername(string username)
         {
             var user = _userRepository.FindByUsername(username);
-
+            if(user != null)
+                if (user.LastName != null)
+                    user.LastName = ' ' + user.LastName;
             //var userDto = new UserDto
             //{
             //    Username = user.Username,
@@ -59,7 +61,7 @@ namespace Backend.Services.UserService
             }
         }
 
-        public async Task RemoveRoleFromUser(string username, Role role)
+        public async Task RemoveRoleFromUser(string username)
         {
             var user = _userRepository.FindByUsername(username);
             if (user != null)
@@ -77,12 +79,12 @@ namespace Backend.Services.UserService
         public async Task<bool> CreateUserAsync(User users)
         {
             var user = _mapper.Map<User>(users);
-            try
+            if (GetUserByUsername(user.Username) == null)
             {
                 await _userRepository.AddAsync(user);
                 return true; // Returnează true dacă adăugarea a fost un succes
             }
-            catch
+            else
             {
                 return false; // Returnează false dacă a apărut o excepție
             }

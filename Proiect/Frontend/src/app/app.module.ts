@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { RegisterComponent } from './reactive-forms/register/register.component';
 import { AccountComponent } from './reactive-forms/account/account.component';
+import { AdminComponent } from './reactive-forms/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AccountComponent } from './reactive-forms/account/account.component';
     RouterModule.forRoot([
       { path: 'register', component: RegisterComponent },
       { path: 'account', component: AccountComponent },
+      { path: 'admin', component: AdminComponent },
       { path: 'fetchData', component: FetchDataComponent }
     ])
   ],

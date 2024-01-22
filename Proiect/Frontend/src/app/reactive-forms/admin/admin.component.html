@@ -1,0 +1,41 @@
+<div>
+  <h1>Admin forms</h1>
+  <p>Update User Role</p>
+  <form [formGroup]="RoleForm">
+    <input formControlName="username" placeholder="Username-ul" type="text">
+    <input formControlName="role" placeholder="Rolul" type="text">
+  </form>
+  <div>
+    <button (click)="UpdateRole()"> Submit</button>
+  </div>
+  <p>Remove User Role</p>
+  <form [formGroup]="RoleForm">
+    <input formControlName="username" placeholder="Username-ul" type="text">
+  </form>
+  <div>
+    <button (click)="RemoveRole()"> Submit</button>
+  </div>
+  <p>Find User By Username</p>
+  <form [formGroup]="RoleForm">
+    <input formControlName="username" placeholder="Username-ul" type="text">
+  </form>
+  <div>
+    <button (click)="FindUser()"> Submit</button>
+    <p>Utilizator:</p>
+    <p>ㅤId: {{ user.id }}</p>
+    <p>ㅤFull Name: {{ user.fullName }}</p>
+    <p>ㅤUsername: {{ user.username }}</p>
+    <p>ㅤEmail: {{ user.email }}</p>
+    <p>ㅤRole: {{ user.role }}</p>
+  </div>
+  <p>Delete User Account</p>
+  <form [formGroup]="RoleForm">
+    <input formControlName="username" placeholder="Username-ul" type="text">
+  </form>
+  <div>
+    <button (click)="DeleteUser()"> Submit</button>
+  </div>
+  <div>
+    <p>{{ message }}</p>
+  </div>
+</div>

@@ -11,6 +11,6 @@
     "\\src\\app\\reactive-forms\\account",
     "\\src\\app\\reactive-forms\\register"
   ],
-  "SelectedNode": "\\src\\app\\core\\services\\api.service.ts",
+  "SelectedNode": "\\src\\app\\core\\services\\account.secvice.ts",
   "PreviewInSolutionExplorer": false
 }

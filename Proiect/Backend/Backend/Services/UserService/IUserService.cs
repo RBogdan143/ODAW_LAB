@@ -13,7 +13,7 @@ namespace Backend.Services.UserService
         Task<User> GetById(Guid id);
 
         Task AssignRoleToUser(string username, Role role);
-        Task RemoveRoleFromUser(string username, Role role);
+        Task RemoveRoleFromUser(string username);
 
         Task<bool> CreateUserAsync(User users);
         Task<User> AuthenticateAsync(string username, string password);

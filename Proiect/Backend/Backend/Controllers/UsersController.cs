@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Identity;
+using System.Data;
 
 namespace Backend.Controllers
 {
@@ -37,7 +39,7 @@ namespace Backend.Controllers
             try
             {
                 await _userService.AssignRoleToUser(username, role);
-                return Ok("Rolul a fost atribuit cu succes.");
+                return Ok(new { message = "Rolul a fost atribuit cu succes." });
             }
             catch (Exception ex)
             {
@@ -47,12 +49,12 @@ namespace Backend.Controllers
 
         [HttpPut("RemoveRole")]
         [Authorize(Roles = "Admin")] // Restricționează accesul la acest endpoint doar pentru Admini
-        public async Task<IActionResult> RemoveRoleFromUser([FromQuery] string username, [FromQuery] Role role)
+        public async Task<IActionResult> RemoveRoleFromUser([FromQuery] string username)
         {
             try
             {
-                await _userService.RemoveRoleFromUser(username, role);
-                return Ok("Rolul a fost eliminat cu succes.");
+                await _userService.RemoveRoleFromUser(username);
+                return Ok(new { message = "Rolul a fost eliminat cu succes." });
             }
             catch (Exception ex)
             {
@@ -105,9 +107,9 @@ namespace Backend.Controllers
             var result = await _userService.DeleteUser(username);
             if (result)
             {
-                return Ok("Utilizatorul a fost șters cu succes.");
+                return Ok(new { message = "Utilizatorul a fost șters cu succes." });
             }
-            return NotFound("Utilizatorul nu a fost găsit.");
+            return NotFound(new { message = "Utilizatorul nu a fost găsit." });
         }
 
         [HttpPut("UpdateProfile")]
@@ -125,13 +127,25 @@ namespace Backend.Controllers
             return BadRequest("Actualizarea profilului a eșuat.");
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Find([FromQuery] Guid ID)
+        [HttpGet("Account")]
+        [Authorize]
+        public async Task<IActionResult> Get()
         {
             // Obținem ID-ul utilizatorului autentificat din claim-urile token-ului JWT
-            var user = await _userService.GetById(ID);
+            var jti = User.Claims.FirstOrDefault(claim => claim.Type == JwtRegisteredClaimNames.Jti).Value;
+            Guid id = Guid.Parse(jti);
+            var user = await _userService.GetById(id);
+            
+            var userDetails = new
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Username = user.Username,
+                Email = user.Email,
+                Password = user.Password.Length
+            };
 
-            return Ok(new { user = user });
+            return Ok(userDetails);
         }
     }
 }
