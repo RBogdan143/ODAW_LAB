@@ -7,6 +7,7 @@
   </form>
   <div>
     <button (click)="UpdateRole()"> Submit</button>
+    <p>{{ message.m1 }}</p>
   </div>
   <p>Remove User Role</p>
   <form [formGroup]="RoleForm">
@@ -14,6 +15,7 @@
   </form>
   <div>
     <button (click)="RemoveRole()"> Submit</button>
+    <p>{{ message.m2 }}</p>
   </div>
   <p>Find User By Username</p>
   <form [formGroup]="RoleForm">
@@ -21,21 +23,128 @@
   </form>
   <div>
     <button (click)="FindUser()"> Submit</button>
-    <p>Utilizator:</p>
-    <p>ㅤId: {{ user.id }}</p>
-    <p>ㅤFull Name: {{ user.fullName }}</p>
-    <p>ㅤUsername: {{ user.username }}</p>
-    <p>ㅤEmail: {{ user.email }}</p>
-    <p>ㅤRole: {{ user.role }}</p>
+    <div *ngIf="isUserLoaded">
+      <p>Utilizator:</p>
+      <p>ㅤId: {{ user.id }}</p>
+      <p>ㅤFull Name: {{ user.fullName }}</p>
+      <p>ㅤUsername: {{ user.username }}</p>
+      <p>ㅤEmail: {{ user.email }}</p>
+      <p>ㅤRole: {{ user.role }}</p>
+    </div>
   </div>
+  <p>{{ message.m3 }}</p>
   <p>Delete User Account</p>
   <form [formGroup]="RoleForm">
     <input formControlName="username" placeholder="Username-ul" type="text">
   </form>
   <div>
     <button (click)="DeleteUser()"> Submit</button>
+    <p>{{ message.m4 }}</p>
   </div>
+  <p>Add Produs</p>
+  <form [formGroup]="ProdusForm">
+    <input formControlName="Nume" placeholder="Nume Produs" type="text">
+    <input formControlName="Pret" placeholder="Pret Produs" type="number">
+    <input formControlName="Imagine" placeholder="Imagine Produs" type="text">
+    <input formControlName="Descriere" placeholder="Descriere Produs" type="text">
+    <input formControlName="Stoc" placeholder="Stoc Produs" type="number">
+  </form>
   <div>
-    <p>{{ message }}</p>
+    <button (click)="AddProdus()"> Submit</button>
+    <p>{{ message.m5 }}</p>
+  </div>
+  <p>Add Stoc Partener</p>
+  <form [formGroup]="ProdusForm">
+    <input formControlName="Id" placeholder="Id Produs" type="text">
+    <input formControlName="Stoc" placeholder="Stoc Partener" type="number">
+  </form>
+  <div>
+    <button (click)="AddStocPartener()"> Submit</button>
+    <p>{{ message.m6 }}</p>
+  </div>
+  <p>Add Discount Code</p>
+  <form [formGroup]="DiscountForm">
+    <input formControlName="Promo_Code" placeholder="Promo Code" type="text">
+    <input formControlName="Discount_Percent" placeholder="Procentul de Reducere" type="number">
+  </form>
+  <div>
+    <button (click)="AddDiscount()"> Submit</button>
+    <p>{{ message.m7 }}</p>
+  </div>
+  <p>Update Produs</p>
+  <form [formGroup]="ProdusForm">
+    <input formControlName="Id" placeholder="Id Produs" type="text">
+    <input formControlName="Nume" placeholder="Nume Produs" type="text">
+    <input formControlName="Pret" placeholder="Pret Produs" type="number">
+    <input formControlName="Imagine" placeholder="Imagine Produs" type="text">
+    <input formControlName="Descriere" placeholder="Descriere Produs" type="text">
+    <input formControlName="IdStoc" placeholder="Id Stoc" type="text">
+    <input formControlName="Stoc" placeholder="Stoc Produs" type="number">
+  </form>
+  <div>
+    <button (click)="UpdateProdus()"> Submit</button>
+    <p>{{ message.m8 }}</p>
+  </div>
+  <p>Update Stoc Partener</p>
+  <form [formGroup]="ProdusForm">
+    <input formControlName="IdStoc" placeholder="Id Stoc Partener" type="text">
+    <input formControlName="Stoc" placeholder="Stoc Produs Partener" type="number">
+  </form>
+  <div>
+    <button (click)="ChangeStoc()"> Submit</button>
+    <p>{{ message.m9 }}</p>
+  </div>
+  <p>Delete Produs</p>
+  <form [formGroup]="ProdusForm">
+    <input formControlName="Id" placeholder="Id Produs" type="text">
+  </form>
+  <div>
+    <button (click)="DeleteProdus()"> Submit</button>
+    <p>{{ message.m10 }}</p>
+  </div>
+  <p>Delete Stoc Partener</p>
+  <form [formGroup]="ProdusForm">
+    <input formControlName="IdStoc" placeholder="Id Stoc Partener" type="text">
+  </form>
+  <div>
+    <button (click)="DeleteStocPart()"> Submit</button>
+    <p>{{ message.m11 }}</p>
+  </div>
+  <p>Delete Discount</p>
+  <form [formGroup]="DiscountForm">
+    <input formControlName="Promo_Code" placeholder="Codul de Şters" type="text">
+  </form>
+  <div>
+    <button (click)="DeleteDiscount()"> Submit</button>
+    <p>{{ message.m12 }}</p>
+  </div>
+  <h3>Lista Produse</h3>
+  <div>
+    <button (click)="GetProdusStoc()"> Show</button>
+    <p>{{ message.m13 }}</p>
+    <div *ngIf="isProdusLoaded">
+      <div *ngFor="let produs of produse.$values">
+        <p>Id Produs: {{ produs.idProdus }}</p>
+        <p>Nume Produs: {{ produs.numeProdus }}</p>
+        <p>Preţ: {{ produs.pretProdus }}</p>
+        <p>Id Stoc: {{ produs.idStoc }}</p>
+        <p>Stoc: {{ produs.stoc }}</p>
+        <p><br /></p>
+      </div>
+    </div>
+  </div>
+  <h3>Lista Coduri Promoţionale</h3>
+  <div>
+    <button (click)="GetDiscount()"> Show</button>
+    <p>{{ message.m14 }}</p>
+    <div *ngIf="isDiscountLoaded">
+      <div *ngFor="let discount of discounts.$values">
+        <div *ngFor="let d of discount.$values">
+          <p>Promo Code: {{ d.promo }}</p>
+          <p>Discount: {{ d.discount }}%</p>
+          <p><br /></p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

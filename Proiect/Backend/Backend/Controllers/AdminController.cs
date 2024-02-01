@@ -57,7 +57,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost("Adauga_Produs")]
-        public async Task<IActionResult> Create([FromQuery] Produse produs, [FromQuery] Stoc stoc)
+        public async Task<IActionResult> Create([FromBody] Produse produs, [FromQuery] Stoc stoc)
         {
             var newProdus = new Produse
             {
@@ -94,7 +94,7 @@ namespace Backend.Controllers
             await _backendcontext.AddAsync(newStocProdus);
             await _backendcontext.SaveChangesAsync();
 
-            return Ok(newProdus);
+            return Ok(new { message = "Produsul a fost adăugat cu succes." });
         }
 
         //WHERE Controller
@@ -128,7 +128,7 @@ namespace Backend.Controllers
             await _backendcontext.AddAsync(newStocProdus);
             await _backendcontext.SaveChangesAsync();
 
-            return Ok(newStoc);
+            return Ok(new { message = "Stocul Partener a fost adăugat cu succes." });
         }
 
         [HttpPost("Adauga_Discount")]
@@ -149,7 +149,7 @@ namespace Backend.Controllers
                 await _backendcontext.AddAsync(newDiscount);
                 await _backendcontext.SaveChangesAsync();
 
-                return Ok(newDiscount);
+                return Ok(new { message = "Codul a fost adăugat." });
             }
             else
                 return BadRequest(new { message = "Codul introdus exista deja!" });
@@ -189,7 +189,7 @@ namespace Backend.Controllers
         }
 
         [HttpPut("Update_Stoc_Partener")]
-        public async Task<IActionResult> Update([FromBody] Guid IdStoc, [FromQuery] int stoc)
+        public async Task<IActionResult> Update([FromQuery] Guid IdStoc, [FromBody] int stoc)
         {
             // Găsim înregistrarea StocProdus existentă
             var stocProdusToUpdate = await _backendcontext.StocProduse
@@ -214,25 +214,33 @@ namespace Backend.Controllers
         }
 
         [HttpDelete("Delete_Produs")]
-        public async Task<IActionResult> Delete([FromQuery] Guid idprodus, [FromQuery] Guid idstoc)
+        public async Task<IActionResult> DeleteProd([FromQuery] Guid idprodus)
         {
             // Găsim înregistrarea StocProdus existentă
             var stocProdusToDelete = await _backendcontext.StocProduse
                 .Include(sp => sp.Produs)
                 .Include(sp => sp.Stoc)
-                .FirstOrDefaultAsync(sp => sp.ProdusId == idprodus && sp.StocId == idstoc);
+                .Where(sp => sp.ProdusId == idprodus)
+                .ToListAsync();
 
-            if (stocProdusToDelete != null)
+            if (stocProdusToDelete.Count > 0)
             {
-                // Ştergem Produsul şi Stocul selectat
-                _backendcontext.Produs.Remove(stocProdusToDelete.Produs);
-                _backendcontext.Stocul.Remove(stocProdusToDelete.Stoc);
+                var produs = stocProdusToDelete[0].Produs;
+                for (int i = 0; i< stocProdusToDelete.Count; i++)
+                {
+                    // Ştergem Stocul selectat
+                    _backendcontext.Stocul.Remove(stocProdusToDelete[i].Stoc);
+                    await _backendcontext.SaveChangesAsync();
+                }
+
+                // Ştergem Produsu la Final
+                _backendcontext.Produs.Remove(produs);
                 await _backendcontext.SaveChangesAsync();
 
                 return Ok(new { message = "Ştergerea a fost realizată cu succes." });
             }
 
-            return NotFound(new { message = "Stocul sau Produsul nu a fost găsit." });
+            return NotFound(new { message = "Produsul nu a fost găsit." });
         }
 
         [HttpDelete("Delete_Stoc_Partener")]
@@ -245,18 +253,28 @@ namespace Backend.Controllers
 
             if (stocProdusToDelete != null)
             {
-                // Ştergem Stocul selectat
-                _backendcontext.Stocul.Remove(stocProdusToDelete.Stoc);
-                await _backendcontext.SaveChangesAsync();
+                var Length = await _backendcontext.StocProduse
+                .Include(sp => sp.Produs)
+                .Include(sp => sp.Stoc)
+                .Where(sp => sp.ProdusId == stocProdusToDelete.ProdusId)
+                .ToListAsync();
 
-                return Ok(new { message = "Ştergerea a fost realizată cu succes." });
+                if (Length.Count > 1)
+                {
+                    // Ştergem Stocul partener
+                    _backendcontext.Stocul.Remove(stocProdusToDelete.Stoc);
+                    await _backendcontext.SaveChangesAsync();
+
+                    return Ok(new { message = "Ştergerea a fost realizată cu succes." });
+                }
+                else return BadRequest(new { message = "Stocul nu poate fi şters." });
             }
 
             return NotFound(new { message = "Stocul nu a fost găsit." });
         }
 
         [HttpDelete("Delete_Discount")]
-        public async Task<IActionResult> Delete([FromQuery] string code)
+        public async Task<IActionResult> DeleteStoc([FromQuery] string code)
         {
             var discounts = await _backendcontext.Discount
                 .Where(x => x.Promo_Code == code)
