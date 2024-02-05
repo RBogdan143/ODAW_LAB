@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { AdminService } from '../../core/services/admin.service';
+import { AdminGuard } from '../../core/guards/AdminGuard';
 
 @Component({
   selector: 'app-admin',
@@ -32,10 +33,12 @@ export class AdminComponent {
     Discount_Percent: [Number(), Validators.required]
   })
 
-  constructor(private readonly formBuilder: FormBuilder, private readonly adminService: AdminService) {
+  constructor(private readonly formBuilder: FormBuilder, private readonly adminService: AdminService, private readonly adminGuard: AdminGuard) {
     
   }
-  
+
+  V = this.adminGuard.canActivate();
+
   message = {
     m1: '',
     m2: '',
@@ -241,7 +244,7 @@ export class AdminComponent {
         Stoc: stoc,
         ProdusId: this.ProdusForm.value.Id,
         Produs: produs
-      }
+      };
       this.adminService.UpdateProd(stocprod).subscribe(
         data => {
           this.message.m8 = String(data.message);

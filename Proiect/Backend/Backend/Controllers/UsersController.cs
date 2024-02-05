@@ -147,5 +147,17 @@ namespace Backend.Controllers
 
             return Ok(userDetails);
         }
+
+        [HttpGet("Validare")]
+        [Authorize]
+        public async Task<IActionResult> Val()
+        {
+            // Obținem ID-ul utilizatorului autentificat din claim-urile token-ului JWT
+            var jti = User.Claims.FirstOrDefault(claim => claim.Type == JwtRegisteredClaimNames.Jti).Value;
+            Guid id = Guid.Parse(jti);
+            var user = await _userService.GetById(id);
+
+            return Ok(user.Role);
+        }
     }
 }

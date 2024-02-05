@@ -148,7 +148,7 @@ namespace Backend.Controllers
         }
 
         [HttpDelete("Scoate_Produse")]
-        public async Task<IActionResult> Delete([FromBody] Guid IdProdus)
+        public async Task<IActionResult> Delete([FromQuery] Guid IdProdus)
         {
             var userId = User.FindFirstValue(JwtRegisteredClaimNames.Jti);
 

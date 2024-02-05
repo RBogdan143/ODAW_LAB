@@ -4,13 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\core",
+    "\\src\\app\\core\\directives",
     "\\src\\app\\core\\guards",
-    "\\src\\app\\core\\services",
-    "\\src\\app\\fetch-data",
+    "\\src\\app\\core\\pipe",
+    "\\src\\app\\Pagina_Produs",
     "\\src\\app\\reactive-forms",
-    "\\src\\app\\reactive-forms\\account",
     "\\src\\app\\reactive-forms\\register"
   ],
-  "SelectedNode": "\\src\\app\\reactive-forms\\account\\account.component.ts",
+  "SelectedNode": "\\src\\app\\core\\pipe\\ExclaimPipe.ts",
   "PreviewInSolutionExplorer": false
 }

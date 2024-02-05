@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import { AuthenticationService } from '../../core/services/authentication.service';
+import { AuthentificationService } from '../../core/services/authentification.service';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +22,7 @@ export class RegisterComponent {
     password: new FormControl('', Validators.required)
   })
 
-  constructor(private readonly formBuilder: FormBuilder, private readonly authenticationService: AuthenticationService) {
+  constructor(private readonly formBuilder: FormBuilder, private readonly authentificationService: AuthentificationService) {
 
   }
 
@@ -32,7 +32,7 @@ export class RegisterComponent {
     console.log(this.registerForm.value);
     this.message = null;
     if (this.registerForm.valid)
-      this.authenticationService.register(this.registerForm.value).subscribe(data => {
+      this.authentificationService.register(this.registerForm.value).subscribe(data => {
           this.message = String(data.message);
       },
         response => {
@@ -53,7 +53,7 @@ export class RegisterComponent {
     this.message = null;
     if (this.loginForm.valid)
     {
-      this.authenticationService.login(this.loginForm.value).subscribe(
+      this.authentificationService.login(this.loginForm.value).subscribe(
         data => {
           localStorage.setItem('token', data.token);
           this.message = "User logged in successfully!";

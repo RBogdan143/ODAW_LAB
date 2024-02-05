@@ -2,7 +2,9 @@
   <button [routerLink]="['/register']">Register</button>
   <button [routerLink]="['/fetchData']">Data</button>
   <button [routerLink]="['/account']">Account</button>
-  <button [routerLink]="['/admin']">Admin</button>
+  <div *ngIf="IsAdmin | async">
+    <button [routerLink]="['/admin']">Admin</button>
+  </div>
   <main class="container">
     <router-outlet></router-outlet>
   </main>
