@@ -1,0 +1,19 @@
+<mat-card>
+  <figure>
+    <img appImagePreloader="{{produs.imagineProdus}}" height="250vw" style="display: block;">
+    <p style="font-size: 1.5vw;">{{produs.produs}}</p>
+    <h3 style="font-size: 3vw;">{{produs.pretProdus}} lei</h3>
+    <div *ngif="localStorage.getItem('cos') == null">
+      <button mat-button (click)="MakeCos(produs.idProdus)">Adaugă în coş</button>
+    </div>
+    <div *ngif="localStorage.getItem('cos') != null">
+      <button mat-button (click)="GrowCos(produs.idProdus)">Adaugă în coş</button>
+    </div>
+    <div *ngif="produs.stoc <= 5">
+      <h5 style="font-size: 1vw; color: red;">Stoc limitat</h5>
+    </div>
+    <figcaption>
+      {{produs.descriereProdus}}
+    </figcaption>
+  </figure>
+</mat-card>
